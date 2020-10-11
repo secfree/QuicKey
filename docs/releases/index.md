@@ -12,7 +12,7 @@ comments: true
 
 ### Added
 
-* [Pinyin](https://en.wikipedia.org/wiki/Pinyin) strings in the search query will now match Chinese characters in tab titles and URLs.  This option is enabled by default if Chrome's language is set to Chinese or if Chinese characters are found in any currently open tabs titles or URLs. 
+* [Pinyin](https://en.wikipedia.org/wiki/Pinyin) strings in the search query will now match Chinese characters in tab titles and URLs.  This option is enabled by default if Chrome's language is set to Chinese or if Chinese characters are found in any currently open tab titles or URLs. 
 
 ### Fixed
 
