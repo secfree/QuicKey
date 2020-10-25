@@ -34,6 +34,14 @@
 		--background: #eee;
 	}
 
+	.section-label {
+		--color: #ccc;
+	}
+
+	.section-label:hover {
+		--background: #333;
+	}
+
 	.history.icon, .window.icon, .clear.icon {
 		--fill: #aaa;
 	}
@@ -100,7 +108,19 @@
 		--color: #aaa;
 	}
 
-	.shortcut-setting .label b {
+	.pro, .con {
+		--color: #ccc;
+	}
+
+	.pro::before {
+		--color: hsl(120, 100%, 30%);
+	}
+
+	.con::before {
+		--color: hsl(0, 80%, 40%);
+	}
+
+	label b, .label b {
 		--opacity: .8;
 	}
 
@@ -154,6 +174,11 @@
 	font-size: 16px;
 }
 
+html {
+	width: 100vw;
+	overflow-x: hidden;
+}
+
 body {
 	background: var(--background, #fff);
 	color: var(--color, #000);
@@ -162,7 +187,7 @@ body {
 	cursor: default;
 	position: relative;
 	margin: 0;
-	padding: 10em 0;
+	padding: 8em 0;
 	display: flex;
 	justify-content: center;
 	flex-flow: column;
@@ -181,7 +206,7 @@ section {
 h1 {
 	font-size: 2em;
 	color: var(--color, #333);
-	margin: 0 0 1.5em 0;
+	margin: 0 0 1.75em 0;
 	position: relative;
 }
 
@@ -201,8 +226,12 @@ h2 {
 	font-size: 1.3em;
 	line-height: 2;
 	color: var(--color, #666);
-	margin: 2.75em 0 1.2em 0;
+	margin: 2.5em 0 1.2em 0;
 	border-bottom: 1px solid var(--border-color, #ddd);
+}
+
+h2:first-of-type {
+	margin-top: 0;
 }
 
 ul {
@@ -247,7 +276,7 @@ button.key:active {
 }
 
 main {
-	width: 35em;
+	width: 52em;
 	position: relative;
 }
 
@@ -279,6 +308,39 @@ main {
 .help-button:hover {
 	color: var(--color, #fff);
 	background: var(--background, #000);
+}
+
+
+/* ===========================================================================
+	Section List
+   =========================================================================== */
+
+.sections-container {
+	display: grid;
+	grid-template-columns: 25% 69%;
+	grid-column-gap: 6%;
+}
+
+.section-list {
+	font-size: 1.3em;
+	margin-left: -.75em;
+}
+
+.section-label {
+	line-height: 2;
+	color: var(--color, #666);
+	padding: 0 .75em;
+	margin: 0;
+	transition: background-color .15s ease-out;
+}
+
+.section-label:hover {
+	background-color: var(--background, #efefef);
+}
+
+.section-label.selected {
+	font-weight: bold;
+	color: inherit;
 }
 
 
@@ -343,7 +405,7 @@ main {
    =========================================================================== */
 
 .control {
-	margin-bottom: .5em;
+	padding: .25em 0;
 }
 
 .control label {
@@ -437,17 +499,21 @@ main {
 	margin: 1em 0 2em 0;
 }
 
-.control-group label {
-	margin-left: 1.25em;
-}
-
 .control-group .label {
 	line-height: 1.5;
-	margin-bottom: .5em;
+	margin-bottom: .25em;
 }
 
 .control-group .label kbd {
 	line-height: 1.2;
+}
+
+.radio-list {
+	padding: 0 0 0 1em;
+}
+
+.radio-list .control {
+	padding: .25em;
 }
 
 .chrome-shortcuts {
@@ -463,7 +529,6 @@ main {
 .new-setting {
 	display: flex;
 	align-items: center;
-	margin-bottom: .5em;
 }
 
 .new-indicator {
@@ -475,12 +540,68 @@ main {
 }
 
 @keyframes red-fade {
-    0% { color: #f33; }
-    100% { color: #d70000; }
+	0% { color: #f33; }
+	100% { color: #d70000; }
 }
 
 .new-setting .control {
 	margin-bottom: 0;
+}
+
+#hidePopupBehavior .label {
+	height: 1.5em;
+}
+
+#hidePopupBehavior .control {
+	height: 2em;
+}
+
+.pro, .con {
+	color: var(--color, #666);
+	font-size: .9em;
+	line-height: 1.3;
+	margin: 0 0 .5em 1em;
+	text-indent: -2.5em;
+	padding-left: 2.5em;
+}
+
+.pro::before, .con::before {
+	font-weight: bold;
+	width: 2.5em;
+	text-indent: 0;
+	display: inline-block;
+}
+
+.pro::before {
+	content: 'PRO';
+	color: var(--color, hsl(120, 100%, 17%));
+}
+
+.con::before {
+	content: 'CON';
+	color: var(--color, hsl(0, 80%, 33%));
+}
+
+.proscons {
+	width: 15em;
+	margin-top: 1.75em;
+	float: left;
+}
+
+.proscons div#offscreen {
+	margin-top: .5em;
+}
+
+.proscons div#behind {
+	margin-top: 2.5em;
+}
+
+.proscons div#tab {
+	margin-top: 4.5em;
+}
+
+.proscons div#minimize {
+	margin-top: 6.5em;
 }
 
 
@@ -500,7 +621,7 @@ main {
 	flex: 1;
 }
 
-.shortcut-setting .label b {
+label b, .label b {
 	opacity: var(--opacity, .65);
 }
 

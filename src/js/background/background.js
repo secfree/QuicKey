@@ -104,7 +104,7 @@ require([
 		// previous tab
 	const MaxPopupLifetime = 450;
 	const TabRemovedDelay = 1000;
-	const RestartDelay = 10 * 1000;
+	const RestartDelay = 60 * 1000;
 	const {
 		OpenPopupCommand,
 		PreviousTabCommand,
@@ -295,17 +295,16 @@ require([
 					direction: -direction,
 					openPopup: true
 				});
-			} else {
-					// don't invert the icon if the user presses the switch to
-					// next shortcut when they're not actively navigating so
-					// that it doesn't invert for no reason
-				if (direction == -1 || !toolbarIcon.isNormal) {
-					toolbarIcon.invertFor(k.MinTabDwellTime);
-				}
-
+			} else if (direction == -1 || !toolbarIcon.isNormal) {
+					// we only want to invert the icon and start navigating if
+					// the user is going backwards or is going forwards before
+					// the cooldown ends
+				toolbarIcon.invertFor(k.MinTabDwellTime);
 				recentTabs.navigate(direction);
 			}
 
+				// this will record an event if the user hits alt-S when they're
+				// not currently navigating, but probably not worth worrying about
 			backgroundTracker.event("recents", action, label);
 		}
 	}
@@ -527,7 +526,7 @@ require([
 	chrome.runtime.onUpdateAvailable.addListener(details => {
 		function restartExtension()
 		{
-			if (!ports.menu) {
+			if (!ports.menu && !popupWindow.isVisible) {
 DEBUG && console.log("=== reloading");
 				chrome.runtime.reload();
 			} else {
@@ -555,7 +554,7 @@ DEBUG && console.log(e);
 		// if any of our tabs were already open when we're getting reloaded,
 		// close them so they're not left in a weird state
 	cp.tabs.query({
-		url: `chrome-extension://${chrome.runtime.id}/*`
+		url: `${chrome.runtime.getURL("")}*`
 	})
 		.then(tabs => cp.tabs.remove(tabs.map(({id}) => id)))
 		.catch(console.error);
