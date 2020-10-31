@@ -19,7 +19,9 @@ define([
 	const DefaultSettings = {
 		[k.SpaceBehavior.Key]: k.SpaceBehavior.Select,
 		[k.EscBehavior.Key]: k.EscBehavior.Clear,
-		[k.HidePopupBehavior.Key]: k.HidePopupBehavior.Offscreen,
+		[k.HidePopupBehavior.Key]: k.IsMac
+			? k.HidePopupBehavior.Behind
+			: k.HidePopupBehavior.Offscreen,
 		[k.MarkTabsInOtherWindows.Key]: true,
 		[k.IncludeClosedTabs.Key]: true,
 		[k.ShowTabCount.Key]: false,
