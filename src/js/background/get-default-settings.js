@@ -26,6 +26,7 @@ define([
 		[k.IncludeClosedTabs.Key]: true,
 		[k.ShowTabCount.Key]: false,
 		[k.UsePinyin.Key]: false,
+		[k.NavigateRecentsWithPopup.Key]: false,
 		[k.Shortcuts.Key]: {
 			mac: MacDefaults,
 			win: DefaultShortcuts

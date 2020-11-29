@@ -57,6 +57,9 @@ define([
 		UsePinyin: {
 			Key: "usePinyin"
 		},
+		NavigateRecentsWithPopup: {
+			Key: "navigateRecentsWithPopup"
+		},
 		Shortcuts: {
 			Key: "shortcuts",
 			MRUSelect: "mruSelect",
